@@ -127,6 +127,7 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+.pdf_parser
 
 # Spyder project settings
 .spyderproject
