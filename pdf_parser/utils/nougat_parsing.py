@@ -12,8 +12,10 @@ def parse_pdf_with_nougat(file_address, api_address):
         response = requests.request("POST", url, headers=headers, data=payload, files=files)
 
         response.raise_for_status()
-
-        return response.text
+        content = response.text
+        # print(type(content))
+        # print(content)
+        return content
         
     except requests.exceptions.RequestException as e:
         print(f"Request Exception: {e}")

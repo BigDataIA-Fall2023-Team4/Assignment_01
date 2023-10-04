@@ -1,6 +1,7 @@
 import streamlit as st
 from utils.pypdf_parsing import *
 from utils.nougat_parsing import *
+import time
 
 def pdf_parsing():
     with st.form("login", clear_on_submit=True):
@@ -15,21 +16,24 @@ def pdf_parsing():
         is_submit = st.form_submit_button("Submit", type="primary")
         if is_submit:
             st.write(f'You selected {pdf_url} file and {option} library for pdf parsing')
-
+            st.divider()
+            # Start time
+            start_time = time.time()
+            local_filename = download_pdf_from_url(pdf_url, 'data/filefromweb.pdf')
             if option == 'Nougat':
-                st.write('Nougat')
-                # api_address = st.text_input('API URL', '', placeholder = 'Connect to API for GPU computation')
-                # is_confirm = st.form_submit_button("Confirm URL", type="secondary")
-                # if is_confirm:
-                local_filename = download_pdf_from_url(pdf_url, 'data/filefromweb.pdf')
                 pdf_content = parse_pdf_with_nougat('data/filefromweb.pdf', api_address)
 
             elif option == 'PyPDF':
-                local_filename = download_pdf_from_url(pdf_url, 'data/filefromweb.pdf')
-                pdf_content = parse_pdf_with_pypdf(local_filename)
-
-            st.write("*Below is the processed file content:*")
+                pdf_content, number_of_pages = parse_pdf_with_pypdf(local_filename)
+                st.write(f"Number of pages processed: *{number_of_pages}*")
+            # End time
+            end_time = time.time()
+            # Calculate elapsed time in seconds
+            elapsed_time = end_time - start_time
+            st.write(f"Processing time: *{elapsed_time:.2f} seconds*")
             st.divider()
+            st.write("*Below is the processed file content:*")
             st.write(pdf_content)
+            
                 
 
