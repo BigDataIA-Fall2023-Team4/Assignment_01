@@ -19,12 +19,13 @@ def pdf_parsing():
             st.divider()
             # Start time
             start_time = time.time()
-            local_filename = download_pdf_from_url(pdf_url, 'pdf_parser/data/filefromweb.pdf')
+            # local_filename = download_pdf_from_url(pdf_url, 'data/filefromweb.pdf')
+            pdf_in_memory = fetch_pdf_from_url(pdf_url)
             if option == 'Nougat':
-                pdf_content = parse_pdf_with_nougat('pdf_parser/data/filefromweb.pdf', api_address)
+                pdf_content = parse_pdf_with_nougat(pdf_url, api_address)
 
             elif option == 'PyPDF':
-                pdf_content, number_of_pages = parse_pdf_with_pypdf(local_filename)
+                pdf_content, number_of_pages = parse_pdf_with_pypdf(pdf_in_memory)
                 st.write(f"Number of pages processed: *{number_of_pages}*")
             # End time
             end_time = time.time()

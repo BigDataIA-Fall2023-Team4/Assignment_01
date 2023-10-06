@@ -1,5 +1,7 @@
 from pypdf import PdfReader
 import requests
+from io import BytesIO
+
 
 def download_pdf_from_url(url, local_filename):
     response = requests.get(url, stream=True)
@@ -17,3 +19,13 @@ def parse_pdf_with_pypdf(local_filename):
         page = reader.pages[i]
         text = text + page.extract_text()
     return text, number_of_pages
+
+def fetch_pdf_from_url(url):
+    response = requests.get(url)
+    if response.status_code != 200:
+        raise Exception("Failed to fetch the PDF.")
+    return BytesIO(response.content)
+
+# Example:
+# url = "https://www.sec.gov/files/form1.pdf"
+# pdf_in_memory = fetch_pdf_from_url(url)
