@@ -27,13 +27,16 @@ def pdf_parsing():
             elif option == 'PyPDF':
                 pdf_content, number_of_pages = parse_pdf_with_pypdf(pdf_in_memory)
                 st.write(f"Number of pages processed: *{number_of_pages}*")
+            summary = text_summarize(pdf_content)
             # End time
             end_time = time.time()
             # Calculate elapsed time in seconds
             elapsed_time = end_time - start_time
             st.write(f"Processing time: *{elapsed_time:.2f} seconds*")
+            st.write("*Below is the summarized file content:*")
+            st.write(summary)
             st.divider()
-            st.write("*Below is the processed file content:*")
+            st.write("*Below is the parsed file content:*")
             st.write(pdf_content)
             
                 
