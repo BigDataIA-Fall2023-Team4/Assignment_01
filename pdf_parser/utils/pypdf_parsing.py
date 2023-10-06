@@ -17,8 +17,3 @@ def parse_pdf_with_pypdf(local_filename):
         page = reader.pages[i]
         text = text + page.extract_text()
     return text, number_of_pages
-
-
-# https://www.sec.gov/files/exam-brochure.pdf
-
-# https://www.sec.gov/files/form1.pdf

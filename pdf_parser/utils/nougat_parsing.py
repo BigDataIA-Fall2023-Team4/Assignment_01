@@ -13,8 +13,6 @@ def parse_pdf_with_nougat(file_address, api_address):
 
         response.raise_for_status()
         content = response.text
-        # print(type(content))
-        # print(content)
         return content
         
     except requests.exceptions.RequestException as e:

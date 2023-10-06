@@ -11,7 +11,7 @@ def pdf_parsing():
             'Which python library would you like to choose for pdf parsing?',
             ('PyPDF', 'Nougat'))
 
-        api_address = st.text_input('API URL', '', placeholder = 'Connect to API for GPU computation')
+        api_address = st.text_input('API URL (If using Nougat)', '', placeholder = 'Connect to API for GPU computation')
 
         is_submit = st.form_submit_button("Submit", type="primary")
         if is_submit:
