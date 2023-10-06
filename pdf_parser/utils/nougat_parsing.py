@@ -29,25 +29,31 @@ def parse_pdf_with_nougat(file_address, api_address):
         return None
     
 def text_summarize(text):
-     # Load the English language model
-    nlp = spacy.load("en_core_web_sm")
-    doc = nlp(text)
-    sentence_scores = {}
-    for sentence in doc.sents:
-        sentence_scores[sentence] = len(sentence)
+    try:
+        # Load the English language model
+        nlp = spacy.load("en_core_web_sm")
+        doc = nlp(text)
+        sentence_scores = {}
+        for sentence in doc.sents:
+            sentence_scores[sentence] = len(sentence)
+        
+        # Seting 30% of the original text to retain in the summary
+        desired_percentage = 20
+
+        # # Calculate the number of sentences to include in the summary
+        # total_sentences = list(doc.sents)
+        # N = int(len(total_sentences) * (desired_percentage / 100))
+
+        # # Ensure N is at least 1 to avoid an empty summary
+        # N = max(1, N)
+
+        N = 5
+
+        summary_sentences = sorted(sentence_scores, key=sentence_scores.get, reverse=True)[:N]
+        summary = " ".join(str(sentence) for sentence in summary_sentences)
+
+        return summary
     
-    # Seting 30% of the original text to retain in the summary
-    desired_percentage = 20
-
-    # Calculate the number of sentences to include in the summary
-    total_sentences = list(doc.sents)
-    N = int(len(total_sentences) * (desired_percentage / 100))
-
-    # Ensure N is at least 1 to avoid an empty summary
-    N = max(1, N)
-
-    summary_sentences = sorted(sentence_scores, key=sentence_scores.get, reverse=True)[:N]
-    summary = " ".join(str(sentence) for sentence in summary_sentences)
-
-    return summary
+    except Exception as e:
+        return f"Error: {str(e)}"
 
