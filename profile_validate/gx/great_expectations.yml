@@ -1,0 +1,56 @@
+fluent_datasources:
+  my_pandas_datasource:
+    type: pandas
+    assets:
+      fm_dataframe:
+        type: dataframe
+        batch_metadata: {}
+  my_pandas_datasource1:
+    type: pandas
+    assets:
+      fm_dataframe:
+        type: dataframe
+        batch_metadata: {}
+config_version: 3.0
+datasources:
+  in_memory_datasource:
+    class_name: PandasDatasource
+    module_name: great_expectations.datasource
+    data_asset_type:
+      class_name: PandasDataset
+    batch_kwargs_generators: {}
+expectations_store_name: expectations_store
+validations_store_name: validations_store
+evaluation_parameter_store_name: evaluation_parameter_store
+checkpoint_store_name: checkpoint_store
+profiler_store_name: profiler_store
+plugins_directory:
+stores:
+  expectations_store:
+    class_name: ExpectationsStore
+    store_backend:
+      class_name: InMemoryStoreBackend
+  validations_store:
+    class_name: ValidationsStore
+    store_backend:
+      class_name: InMemoryStoreBackend
+  evaluation_parameter_store:
+    class_name: EvaluationParameterStore
+  checkpoint_store:
+    class_name: CheckpointStore
+    store_backend:
+      class_name: InMemoryStoreBackend
+  profiler_store:
+    class_name: ProfilerStore
+    store_backend:
+      class_name: InMemoryStoreBackend
+notebooks:
+data_docs_sites: {}
+config_variables_file_path:
+anonymous_usage_statistics:
+  data_context_id: 30b3d2d7-3d1d-4034-8839-42d7a26df731
+  enabled: true
+include_rendered_content:
+  globally: false
+  expectation_suite: false
+  expectation_validation_result: false
