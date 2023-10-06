@@ -3,5 +3,5 @@ from PIL import Image
 
 
 def diagram():
-    image = Image.open('architecture.png')
+    image = Image.open('pdf_parser/pages/architecture.png')
     st.image(image, caption='Architecture Diagram')
