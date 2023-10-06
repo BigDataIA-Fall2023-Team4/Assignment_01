@@ -37,17 +37,15 @@ def text_summarize(text):
         for sentence in doc.sents:
             sentence_scores[sentence] = len(sentence)
         
-        # Seting 30% of the original text to retain in the summary
-        desired_percentage = 20
+        # Seting 10% of the original text to retain in the summary
+        desired_percentage = 10
 
-        # # Calculate the number of sentences to include in the summary
-        # total_sentences = list(doc.sents)
-        # N = int(len(total_sentences) * (desired_percentage / 100))
+        # Calculate the number of sentences to include in the summary
+        total_sentences = list(doc.sents)
+        N = int(len(total_sentences) * (desired_percentage / 100))
 
-        # # Ensure N is at least 1 to avoid an empty summary
-        # N = max(1, N)
-
-        N = 5
+        # Ensure N is at least 1 to avoid an empty summary
+        N = max(1, N)
 
         summary_sentences = sorted(sentence_scores, key=sentence_scores.get, reverse=True)[:N]
         summary = " ".join(str(sentence) for sentence in summary_sentences)
@@ -55,5 +53,7 @@ def text_summarize(text):
         return summary
     
     except Exception as e:
-        return f"Error: {str(e)}"
+        print(f"Error: {str(e)}")
+        return None
+    
 
